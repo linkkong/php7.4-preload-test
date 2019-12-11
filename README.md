@@ -76,7 +76,7 @@
 ```
 运行起环境后可以看到，php74_1是预加载环境，php741_1是无预加载环境，php73_1是php7.3环境，php7.4预加载环境已经比无预加载环境多使用了0.08Mib内存，至于是不是已经预加载了类，还不能下结论
 
-<img src="images/init_status.png">
+![image](images/init_status.png)
 
 下面采用ab来进行简单的压测，并用每秒请求数来进行对比
 ```
