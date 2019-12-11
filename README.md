@@ -122,6 +122,18 @@
 5. 没有做关于laravel的测试，因为不想做了，原理差不多
 6. 在实际应用中，应该对经常使用的类进行热加载，而不要全部加载，参考下面第二个文献
 
+---
+## 最终还是做了Laravel的测试，见图
+> laravel项目是6.5版本，只修改了route/web.php，把默认返回值改成了一个json，其他均未修改
+
+貌似php7.4只要开启preload，不需要配置preload文件也能加快访问速度(原理未知，可能是自动缓存了，如果是自动缓存，那么后期更新项目就需要重启fpm，不然会有问题)，所以我在www目录下面放入了一个laravel项目，然后用ab 进行了压测，压测结果特别低是因为对容器的CPU和内存做了限制。
+
+从2，3图来看，没有开启preload的php7.4与php7.3性能相差无几，但是开启了preload的php7.4，提升还是很明显的，降低了非常多的文件读取性能消耗
+
+![image](images/laravel.png)
+
+
+
 ## 参考文献
 
 1. [Composer: How it should preload in PHP 7.4](https://medium.com/swlh/composer-how-it-should-preload-in-php-7-4-3f8d19fda40)
