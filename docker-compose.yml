@@ -27,6 +27,7 @@ services:
     image: php:7.4-fpm
     volumes:
       - ./www/:/var/www/html/:cached
+      - ./php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
     expose:
       - 9000
     deploy:
@@ -38,6 +39,7 @@ services:
     image: php:7.3.9-fpm
     volumes:
       - ./www/:/var/www/html/:cached
+      - ./php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
     expose:
       - 9000
     deploy:
