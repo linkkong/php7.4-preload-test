@@ -132,6 +132,27 @@
 
 ![image](images/laravel.png)
 
+---
+## Laravel第二次测试
+> 经过韩天峰大佬指正，php7.3和php7.4也应该同时开启opcache，上面的实验提升很大其实是opcache的功劳。
+
+
+![image](images/laravel_second.png)
+
+对laravel的vendor/laravel文件进行了preload，再次做了实验，得到如上的数据，相比较两个php7.4是否开启preload还是有差距的，但是php7.3+opcache的实验数据居然跟php7.4+preload性能接近，这个还有点想不通，需要进一步测试。也可能是laravel框架和php7.4并不适配，亦或是opcache开启的参数没有调优；
+
+	
+### 存在的问题
+1. php7.3+opcache的实验数据居然跟php7.4+preload性能接近
+
+### 可以改进的地方
+1. fpm容器没有调优，没有设置fpm连接数等
+2. opcache参数没有调优，只有 opcache.enable = 1;opcache.enable_cli = 1
+3. 没有测试数据库链接等场景，也没有评测其他框架
+
+### 最后
+
+php7.4开启preload的性能依据官方评测，提升在10%左右，其实并不是很大了，相对开启opcache，收益较小，而且还跟缓存的文件有关。所以这个实验也证明了，php7以上的版本，请务必开启opcache，因为带来的提升真的很大。
 
 
 ## 参考文献
