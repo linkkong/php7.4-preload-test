@@ -16,34 +16,37 @@ services:
     volumes:
       - ./www/:/var/www/html/:cached
       - ./php/preload.ini:/usr/local/etc/php/conf.d/preload.ini
+      - ./php/fpm.conf:/usr/local/etc/php-fpm.d/zfpm.conf
     expose:
       - 9000
     deploy:
       resources:
         limits:
           cpus: '0.25'
-          memory: 150M
+          memory: 500M
   php741:
     image: php:7.4-fpm
     volumes:
       - ./www/:/var/www/html/:cached
       - ./php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ./php/fpm.conf:/usr/local/etc/php-fpm.d/zfpm.conf
     expose:
       - 9000
     deploy:
       resources:
         limits:
           cpus: '0.25'
-          memory: 150M
+          memory: 500M
   php73:
     image: php:7.3.9-fpm
     volumes:
       - ./www/:/var/www/html/:cached
       - ./php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      - ./php/fpm.conf:/usr/local/etc/php-fpm.d/zfpm.conf
     expose:
       - 9000
     deploy:
       resources:
         limits:
           cpus: '0.25'
-          memory: 150M
+          memory: 500M

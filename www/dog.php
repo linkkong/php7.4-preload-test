@@ -1,28 +1,31 @@
 <?php
 
-interface AnimalInterface
-{
-    public function run();
-}
-
-trait DogTrait
-{
-    public function bark()
+namespace MyPet {
+    Interface AnimalInterface
     {
-        return "Wang! Wang!";
+    }
+
+    Trait DogTrait
+    {
+        public function bark()
+        {
+            return "Wang! Wang! from dog.php" . PHP_EOL;
+        }
+    }
+
+    class Dog implements AnimalInterface
+    {
+        use DogTrait;
+
+        public function run()
+        {
+            echo "It is running from dog . php" . PHP_EOL;
+        }
     }
 }
 
-class Dog implements AnimalInterface
-{
-    use DogTrait;
-
-    public function run()
-    {
-        echo "It is running";
-    }
+namespace {
+    $dog = new Dog();
+    $dog->run();
+    echo $dog->bark();
 }
-
-$dog = new Dog();
-$dog->run();
-echo $dog->bark();
