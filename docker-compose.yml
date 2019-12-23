@@ -2,13 +2,17 @@ version: "3.7"
 services:
 
   nginx:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: VeryNginx/Dockerfile
+#    image: nginx:latest
     ports:
       - "8000:80"
       - "8001:81"
       - "8002:82"
+      - "8003:83"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:cached
+#      - ./nginx/conf.d/default.conf:/opt/verynginx/verynginx/nginx_conf/in_http_block.conf:cached
       - ./www:/www
 
   php74:

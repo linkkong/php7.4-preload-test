@@ -1,0 +1,40 @@
+sudo: required
+dist: trusty
+
+os: linux
+
+language: c
+
+compiler:
+  - gcc
+
+addons:
+  apt:
+    packages:
+    - python3
+    - python-pip
+    - python3-pip
+
+cache:
+  apt: true
+  directories:
+  - $HOME/.cache/pip
+  - /opt/verynginx
+
+before_install:
+  - if [ ! -d /opt/verynginx/openresty ]; then python3 install.py install openresty ; fi
+  - sudo rm -rf /opt/verynginx/verynginx  
+  - sudo adduser --system --no-create-home --group nginx
+
+install:
+  - sudo python3 -m pip install -r test/requirements.txt 
+  - sudo python3 install.py install verynginx
+
+before_script:
+  - if [ ! -f /opt/verynginx/openresty/nginx/logs/error.log ]; then touch /opt/verynginx/openresty/nginx/logs/error.log;sudo chown nginx:nginx /opt/verynginx/openresty/nginx/logs/error.log ; fi
+  - sudo /opt/verynginx/openresty/nginx/sbin/nginx 
+  - sudo /opt/verynginx/openresty/nginx/sbin/nginx -s stop
+  - echo -e "127.0.0.1   a.vntest.com\n127.0.0.1   b.vntest.com\n127.0.0.1   c.vntest.com" | sudo tee -a /etc/hosts
+
+script:
+  - sudo python3 test/test.py
